@@ -318,3 +318,4 @@ class DikeNetwork:
             data[f"Expected Evacuation Costs"].append(np.sum(EECosts))
 
         return data
+

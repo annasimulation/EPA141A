@@ -5,12 +5,13 @@ from ema_workbench.em_framework.samplers import sample_uncertainties
 from ema_workbench.util import ema_logging
 import time
 from problem_formulation import get_model_for_problem_formulation
+import pandas as pd
 
 
 if __name__ == "__main__":
     ema_logging.log_to_stderr(ema_logging.INFO)
 
-    dike_model, planning_steps = get_model_for_problem_formulation(5)
+    dike_model, planning_steps = get_model_for_problem_formulation(3)
 
     # Build a user-defined scenario and policy:
     reference_values = {
@@ -47,9 +48,9 @@ if __name__ == "__main__":
     policy0 = Policy("Policy 0", **pol0)
 
     # Call random scenarios or policies:
-    #    n_scenarios = 5
-    #    scenarios = sample_uncertainties(dike_model, 50)
-    #    n_policies = 10
+    # n_scenarios = 5
+    # scenarios = sample_uncertainties(dike_model, 50)
+    # n_policies = 10
 
     # single run
     #    start = time.time()
@@ -65,3 +66,13 @@ if __name__ == "__main__":
 #    with MultiprocessingEvaluator(dike_model) as evaluator:
 #        results = evaluator.perform_experiments(scenarios=10, policies=policy0,
 #                                                uncertainty_sampling='sobol')
+
+    # Convert experiments and outcomes to dataframes
+    experiments_df = pd.DataFrame(experiments)
+    outcomes_df = pd.DataFrame(outcomes)
+
+    # Display experiments
+    experiments_df.to_csv('experiments_df.csv')
+
+    # Display outcomes
+    outcomes_df.to_csv('outcomes_df.csv')

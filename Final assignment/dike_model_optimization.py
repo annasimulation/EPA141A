@@ -17,7 +17,7 @@ import seaborn as sns
 if __name__ == "__main__":
     ema_logging.log_to_stderr(ema_logging.INFO)
 
-    model, steps = get_model_for_problem_formulation(2)
+    model, steps = get_model_for_problem_formulation(3)
 
     reference_values = {
         "Bmax": 175,
@@ -43,7 +43,7 @@ if __name__ == "__main__":
 
     convergence_metrics = [EpsilonProgress()]
 
-    espilon = [1e3] * len(model.outcomes)
+    epsilon = [1e3] * len(model.outcomes)
 
     nfe = 200  # proof of principle only, way to low for actual use
 
@@ -51,7 +51,7 @@ if __name__ == "__main__":
         results, convergence = evaluator.optimize(
             nfe=nfe,
             searchover="levers",
-            epsilons=espilon,
+            epsilons=epsilon,
             convergence=convergence_metrics,
             reference=ref_scenario,
         )
@@ -62,3 +62,4 @@ if __name__ == "__main__":
     ax1.set_xlabel("nr. of generations")
     ax1.set_ylabel(r"$\epsilon$ progress")
     sns.despine()
+    plt.show()

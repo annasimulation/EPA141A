@@ -1,3 +1,4 @@
+
 import math
 import numpy as np
 from scipy.optimize import brentq
@@ -43,6 +44,7 @@ def lake_problem(
         sigma=math.sqrt(math.log(1.0 + stdev ** 2 / mean ** 2)),
         size=(nsamples, nvars)
     )
+
 
     # Initialize the pollution level matrix X
     X = np.zeros((nsamples, nvars))

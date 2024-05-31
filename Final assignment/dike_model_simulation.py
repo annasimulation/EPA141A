@@ -11,7 +11,7 @@ import pandas as pd
 if __name__ == "__main__":
     ema_logging.log_to_stderr(ema_logging.INFO)
 
-    dike_model, planning_steps = get_model_for_problem_formulation(3)
+    dike_model, planning_steps = get_model_for_problem_formulation(6)
 
     # Build a user-defined scenario and policy:
     reference_values = {
@@ -63,7 +63,7 @@ if __name__ == "__main__":
     experiments, outcomes = perform_experiments(dike_model, ref_scenario, 5)
 
 # multiprocessing
-#    with MultiprocessingEvaluator(dike_model) as evaluator:
+#     with MultiprocessingEvaluator(dike_model) as evaluator:
 #        results = evaluator.perform_experiments(scenarios=10, policies=policy0,
 #                                                uncertainty_sampling='sobol')
 
@@ -72,7 +72,7 @@ if __name__ == "__main__":
     outcomes_df = pd.DataFrame(outcomes)
 
     # Display experiments
-    experiments_df.to_csv('experiments_df.csv')
+    experiments_df.to_csv('experiments_df6.csv')
 
     # Display outcomes
-    outcomes_df.to_csv('outcomes_df.csv')
+    outcomes_df.to_csv('outcomes_df6.csv')

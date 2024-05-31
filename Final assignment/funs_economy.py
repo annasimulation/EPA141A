@@ -5,7 +5,6 @@ Created on Sun Oct 29 15:52:12 2017
 """
 import numpy as np
 
-
 def cost_fun(ratio, c, b, lambd, dikeinit, dikeincrease):
     """Cost of raising the dikes, assuming an exponential function"""
 

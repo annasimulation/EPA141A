@@ -357,6 +357,31 @@ def get_model_for_problem_formulation(problem_formulation_id):
         outcomes = []
 
         for dike in function.dikelist:
+            cost_variables = []
+            for e in ["Expected Annual Damage", "Dike Investment Costs"]:
+                cost_variables.append(f"{dike}_{e}")
+
+        outcomes.append(
+            ArrayOutcome(
+                f"Expected Annual Damage",
+                variable_name=[
+                    f"{dike}_Expected Annual Damage" for dike in function.dikelist
+                ],
+                function=sum_over_time,
+            )
+        )
+
+        outcomes.append(
+            ArrayOutcome(
+                f"Dike Investment Costs",
+                variable_name=[
+                    f"{dike}_Dike Investment Costs" for dike in function.dikelist
+                ],
+                function=sum_over_time,
+            )
+        )
+
+        for dike in function.dikelist:
             for entry in [
                 "Expected Annual Damage",
                 "Dike Investment Costs",
@@ -370,11 +395,55 @@ def get_model_for_problem_formulation(problem_formulation_id):
         outcomes.append(ArrayOutcome("Expected Evacuation Costs"))
         dike_model.outcomes = outcomes
 
+    # Fully disaggregated:
+    elif problem_formulation_id == 6:
+
+        damage_variables = []
+        dike_cost_variables = []
+        rfr_costs_variables = []
+
+        damage_variables.extend(
+            [f"{dike}_Expected Annual Damage" for dike in function.dikelist]
+        )
+        dike_cost_variables.extend(
+            [f"{dike}_Dike Investment Costs" for dike in function.dikelist]
+        )
+        rfr_costs_variables.extend([f"RfR Total Costs"])
+
+        dike_model.outcomes = [
+            ScalarOutcome(
+                "Expected Annual Damage",
+                variable_name=[var for var in damage_variables],
+                function=sum_over,
+                kind=direction,
+            ),
+            ScalarOutcome(
+                "Dike Investment Costs",
+                variable_name=[var for var in dike_cost_variables],
+                function=sum_over,
+                kind=direction,
+            ),
+            ScalarOutcome(
+                "RfR Investment Costs",
+                variable_name=[var for var in rfr_costs_variables],
+                function=sum_over,
+                kind=direction,
+            ),
+
+            # ScalarOutcome(
+            #     "RfR Total Costs",
+            #     variable_name="RfR Total Costs",
+            #     function=sum_over,
+            #     kind=direction,
+            # )
+        ]
+
+
+        return dike_model, function.planning_steps
+
     else:
         raise TypeError("unknown identifier")
 
-    return dike_model, function.planning_steps
-
-
 if __name__ == "__main__":
     get_model_for_problem_formulation(3)
+

@@ -60,7 +60,7 @@ if __name__ == "__main__":
     #    results = dike_model.outcomes_output
 
     # series run
-    experiments, outcomes = perform_experiments(dike_model, ref_scenario, 5)
+    experiments, outcomes = perform_experiments(dike_model, ref_scenario, 100)
 
 # multiprocessing
 #     with MultiprocessingEvaluator(dike_model) as evaluator:

@@ -63,9 +63,9 @@ if __name__ == "__main__":
     experiments, outcomes = perform_experiments(dike_model, ref_scenario, 100)
 
 # multiprocessing
-#     with MultiprocessingEvaluator(dike_model) as evaluator:
-#        results = evaluator.perform_experiments(scenarios=10, policies=policy0,
-#                                                uncertainty_sampling='sobol')
+    with MultiprocessingEvaluator(dike_model) as evaluator:
+       results = evaluator.perform_experiments(scenarios=10, policies=policy0,
+                                               uncertainty_sampling='sobol')
 
     # Convert experiments and outcomes to dataframes
     experiments_df = pd.DataFrame(experiments)

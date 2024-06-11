@@ -2,7 +2,7 @@
 
 #SBATCH --job-name="mordm_db"
 #SBATCH --partition=compute
-#SBATCH --account=innovation
+#SBATCH --account=Education-TPM-MSc-EPA
 #SBATCH --time=03:00:00
 #SBATCH --ntasks=10
 #SBATCH --cpus-per-task=1

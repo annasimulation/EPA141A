@@ -4,7 +4,8 @@ import numpy as np
 from ema_workbench import (Model, RealParameter, IntegerParameter, CategoricalParameter,
                            ScalarOutcome, perform_experiments, Samplers, Policy, Scenario, HypervolumeMetric,
                            GenerationalDistanceMetric, EpsilonIndicatorMetric, InvertedGenerationalDistanceMetric,
-                           SpacingMetric)
+                           SpacingMetric,
+                           MPIEvaluator)
 from ema_workbench.em_framework import (SequentialEvaluator, MultiprocessingEvaluator)
 from ema_workbench.util import ema_logging
 from ema_workbench.em_framework.optimization import (EpsNSGAII, Convergence)
@@ -122,7 +123,7 @@ if __name__ == '__main__':
             ]
 
             # Run optimization
-            result, convergence = evaluator.optimize(nfe=5000, reference=reference, epsilons=[0.1, 0.1, 0.1, 0.1],
+            result, convergence = evaluator.optimize(nfe=150000, reference=reference, epsilons=[0.1, 0.1, 0.1, 0.1],
                                                      convergence=convergence_metrics)
             results.append(result)
             convergences.append(convergence)

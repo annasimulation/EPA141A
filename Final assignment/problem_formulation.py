@@ -10,11 +10,13 @@ from ema_workbench import (
     ScalarOutcome,
     IntegerParameter,
     RealParameter,
+    Scenario
 )
 from dike_model_function import DikeNetwork  # @UnresolvedImport
 
 import numpy as np
 
+Scenario('refference',{})
 
 def sum_over(*args):
     numbers = []
@@ -32,6 +34,8 @@ def sum_over_time(*args):
     data = np.asarray(args)
     summed = data.sum(axis=0)
     return summed
+
+
 
 
 def get_model_for_problem_formulation(problem_formulation_id):

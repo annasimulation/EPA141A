@@ -2,7 +2,7 @@
 
 #SBATCH --job-name="mordm_db"
 #SBATCH --partition=compute
-#SBATCH --account=research-education-TPM-MSc-EPA
+#SBATCH --account=innovation
 #SBATCH --time=03:00:00
 #SBATCH --ntasks=10
 #SBATCH --cpus-per-task=1
@@ -18,4 +18,4 @@ module load py-pip
 
 pip install --user --upgrade ema_workbench
 
-mpiexec -n 1 python3 Ass8.1(MORDM)(5runs).py
+mpiexec -n 1 python3 MORDM_test_db.py

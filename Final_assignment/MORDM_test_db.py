@@ -4,7 +4,8 @@ import numpy as np
 from ema_workbench import (Model, RealParameter, IntegerParameter, CategoricalParameter,
                            ScalarOutcome, perform_experiments, Samplers, Policy, Scenario, HypervolumeMetric,
                            GenerationalDistanceMetric, EpsilonIndicatorMetric, InvertedGenerationalDistanceMetric,
-                           SpacingMetric)
+                           SpacingMetric,
+                           MPIEvaluator)
 from ema_workbench.em_framework import (SequentialEvaluator, MultiprocessingEvaluator)
 from ema_workbench.util import ema_logging
 from ema_workbench.em_framework.optimization import (EpsNSGAII, Convergence)

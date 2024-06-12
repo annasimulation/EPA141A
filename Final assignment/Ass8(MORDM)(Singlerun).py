@@ -120,3 +120,8 @@ if __name__ == '__main__':
     result_df.to_csv('optimization_policies_singlerun.csv', index=False)
     outcomes_df = result_df.loc[:, [col for col in result_df.columns if col in [o.name for o in dike_model.outcomes]]]
     outcomes_df.to_csv('optimization_outcomes_singlerun.csv', index=False)
+
+    # Save convergence metrics
+    convergence_df = pd.DataFrame(convergence)
+    convergence_df.to_csv('convergence_metrics_singlerun.csv', index=False)
+

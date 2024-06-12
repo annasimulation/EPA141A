@@ -122,39 +122,23 @@ if __name__ == '__main__':
             ]
 
             # Run optimization
-            result, convergence = evaluator.optimize(nfe=5000, reference=reference, epsilons=[0.1, 0.1, 0.1, 0.1],
-                                                     convergence=convergence_metrics)
+            result, convergence = evaluator.optimize(
+                nfe=50,
+                reference=reference,
+                epsilons=[0.1, 0.1, 0.1, 0.1],
+                convergence=convergence_metrics
+            )
             results.append(result)
             convergences.append(convergence)
 
     # Save results
-    for idx, result in enumerate(results):
+    for idx, (result, convergence) in enumerate(zip(results, convergences)):
         result_df = pd.DataFrame(result)
         result_df.to_csv(f'optimization_policies_{idx}.csv', index=False)
-        outcomes_df = result_df.loc[:, [col for col in result_df.columns if col in [o.name for o in dike_model.outcomes]]]
+        outcomes_df = result_df.loc[:,
+                      [col for col in result_df.columns if col in [o.name for o in dike_model.outcomes]]]
         outcomes_df.to_csv(f'optimization_outcomes_{idx}.csv', index=False)
 
-    # Define limits for parallel coordinates plot
-    limits = pd.DataFrame(
-        [[0, 0, 0, 0],
-         [5, 5, 5, 5]],
-        columns=['Total Costs', 'Expected Number of Deaths', 'Expected Annual Damage', 'Dike Investment Costs']
-    )
-
-    # Create parallel axes
-    axes = parcoords.ParallelAxes(limits)
-
-    # Plot the outcomes
-    for i, (result, color) in enumerate(zip(results, sns.color_palette(n_colors=len(results)))):
-        outcomes = result.loc[:, ['Total Costs', 'Expected Number of Deaths', 'Expected Annual Damage', 'Dike Investment Costs']]
-        axes.plot(outcomes, color=color, label='results {}'.format(i))
-
-    # Invert the axes for outcomes where lower values are better
-    axes.invert_axis('Total Costs')
-    axes.invert_axis('Expected Number of Deaths')
-    axes.invert_axis('Expected Annual Damage')
-    axes.invert_axis('Dike Investment Costs')
-
-    # Add legend and show plot
-    axes.legend()
-    plt.show()
+        # Save convergence metrics
+        convergence_df = pd.DataFrame(convergence)
+        convergence_df.to_csv(f'convergence_metrics_{idx}.csv', index=False)

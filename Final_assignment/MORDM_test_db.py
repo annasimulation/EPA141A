@@ -124,7 +124,7 @@ if __name__ == '__main__':
 
             # Run optimization
             result, convergence = evaluator.optimize(
-                nfe=50,
+                nfe=1500,
                 reference=reference,
                 epsilons=[0.1, 0.1, 0.1, 0.1],
                 convergence=convergence_metrics

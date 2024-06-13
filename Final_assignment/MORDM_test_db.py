@@ -1,21 +1,25 @@
 # Import necessary libraries
 import pandas as pd
-import numpy as np
+# import numpy as np
 from ema_workbench import (Model, RealParameter, IntegerParameter, CategoricalParameter,
-                           ScalarOutcome, perform_experiments, Samplers, Policy, Scenario, HypervolumeMetric,
-                           GenerationalDistanceMetric, EpsilonIndicatorMetric, InvertedGenerationalDistanceMetric,
-                           SpacingMetric,
-                           MPIEvaluator)
-from ema_workbench.em_framework import (SequentialEvaluator, MultiprocessingEvaluator)
-from ema_workbench.util import ema_logging
-from ema_workbench.em_framework.optimization import (EpsNSGAII, Convergence)
-from ema_workbench.analysis import parcoords
+                           ScalarOutcome, Scenario)
+
+                           # perform_experiments, Samplers, Policy,  HypervolumeMetric,
+                           # GenerationalDistanceMetric, EpsilonIndicatorMetric, InvertedGenerationalDistanceMetric,
+                           # SpacingMetric,
+                           # MPIEvaluator)
+from ema_workbench.em_framework import (MultiprocessingEvaluator)
+#from ema_workbench.em_framework import (SequentialEvaluator)
+
+# from ema_workbench.util import ema_logging
+# from ema_workbench.em_framework.optimization import (EpsNSGAII, Convergence)
+# from ema_workbench.analysis import parcoords
 from dike_model_function import DikeNetwork
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 from ema_workbench.em_framework.optimization import (ArchiveLogger, EpsilonProgress)
-import os
-from ema_workbench.em_framework.optimization import to_problem
-import seaborn as sns
+# import os
+# from ema_workbench.em_framework.optimization import to_problem
+# import seaborn as sns
 
 # Define the sum_over function
 def sum_over(*args):
@@ -124,7 +128,7 @@ if __name__ == '__main__':
 
             # Run optimization
             result, convergence = evaluator.optimize(
-                nfe=50,
+                nfe=150000,
                 reference=reference,
                 epsilons=[0.1, 0.1, 0.1, 0.1],
                 convergence=convergence_metrics

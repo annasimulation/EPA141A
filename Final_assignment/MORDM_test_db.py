@@ -149,3 +149,4 @@ if __name__ == '__main__':
         # Save convergence metrics
         convergence_df = pd.DataFrame(convergence)
         convergence_df.to_csv(f'convergence_metrics_{idx}.csv', index=False)
+

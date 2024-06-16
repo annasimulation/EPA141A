@@ -115,8 +115,6 @@ if __name__ == '__main__':
     convergences = []
 
     # Perform a small benchmark run
-    start_time = time.time()
-
     with MultiprocessingEvaluator(dike_model) as evaluator:
         for i in range(5):
             # Define convergence metrics
@@ -132,7 +130,7 @@ if __name__ == '__main__':
 
             # Run optimization
             result, convergence = evaluator.optimize(
-                nfe=1000,
+                nfe=150000,
                 reference=reference,
                 epsilons=[0.1, 0.1, 0.1, 0.1],
                 convergence=convergence_metrics
@@ -151,12 +149,3 @@ if __name__ == '__main__':
         # Save convergence metrics
         convergence_df = pd.DataFrame(convergence)
         convergence_df.to_csv(f'convergence_metrics_{idx}.csv', index=False)
-
-    end_time = time.time()
-    elapsed_time = end_time - start_time
-    full_nfe = 150000
-    # Extrapolate to estimate the full run time
-    estimated_total_time = elapsed_time * (full_nfe / 1000)
-
-    print(f"Elapsed time for 1000 iterations: {elapsed_time:.2f} seconds")
-    print(f"Estimated total time for {full_nfe} iterations: {estimated_total_time / 3600:.2f} hours")

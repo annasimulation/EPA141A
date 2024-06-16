@@ -16,7 +16,7 @@ from dike_model_function import DikeNetwork  # @UnresolvedImport
 
 import numpy as np
 
-Scenario('refference',{})
+Scenario('reference',{})
 
 def sum_over(*args):
     numbers = []

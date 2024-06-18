@@ -20,4 +20,4 @@ module load py-pip
 
 pip install --user --upgrade ema_workbench
 
-mpiexec -n 24 python3 ema_mpi_model.py
+mpiexec -n 24 python3 MORDM_single_run_delftblue.py

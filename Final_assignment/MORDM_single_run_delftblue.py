@@ -10,6 +10,11 @@ from ema_workbench.analysis import parcoords
 from dike_model_function import DikeNetwork
 import os
 import datetime
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Define the sum_over function
 def sum_over(*args):
@@ -94,10 +99,12 @@ if __name__ == '__main__':
     # Create an output directory
     output_dir = "output"
     os.makedirs(output_dir, exist_ok=True)
+    logger.info(f"Created output directory: {output_dir}")
 
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     archive_dir = f"{output_dir}/archives_{timestamp}"
     os.makedirs(archive_dir, exist_ok=True)
+    logger.info(f"Created archive directory: {archive_dir}")
 
     with MPIEvaluator(dike_model) as evaluator:
         convergence_metrics = [
@@ -114,6 +121,7 @@ if __name__ == '__main__':
             nfe=100000, reference=reference, epsilons=[0.1, 0.1, 0.1, 0.1],
             convergence=convergence_metrics
         )
+        logger.info(f"Optimization completed. Results and convergence metrics obtained.")
 
     result_df = pd.DataFrame(result)
     uncertainty_columns = [u.name for u in dike_model.uncertainties]
@@ -121,12 +129,17 @@ if __name__ == '__main__':
     lever_columns = [l.name for l in dike_model.levers]
 
     result_df.to_csv(f'{output_dir}/optimization_policies_singlerun.csv', index=False)
+    logger.info(f"Saved optimization policies to {output_dir}/optimization_policies_singlerun.csv")
+
     outcomes_df = result_df.loc[:, [col for col in result_df.columns if col in outcome_columns]]
     outcomes_df.to_csv(f'{output_dir}/optimization_outcomes_singlerun.csv', index=False)
+    logger.info(f"Saved optimization outcomes to {output_dir}/optimization_outcomes_singlerun.csv")
 
     all_columns = uncertainty_columns + lever_columns + outcome_columns
     result_df_combined = result_df.loc[:, all_columns]
     result_df_combined.to_csv(f'{output_dir}/combined_optimization_outcomes_singlerun.csv', index=False)
+    logger.info(f"Saved combined optimization outcomes to {output_dir}/combined_optimization_outcomes_singlerun.csv")
 
     convergence_df = pd.DataFrame(convergence)
     convergence_df.to_csv(f'{output_dir}/convergence_metrics_singlerun.csv', index=False)
+    logger.info(f"Saved convergence metrics to {output_dir}/convergence_metrics_singlerun.csv")

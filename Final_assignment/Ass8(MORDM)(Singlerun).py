@@ -10,6 +10,7 @@ from ema_workbench.em_framework.optimization import (ArchiveLogger, EpsilonProgr
 from ema_workbench.analysis import parcoords
 from dike_model_function import DikeNetwork
 import os
+import datetime
 
 # Define the sum_over function
 def sum_over(*args):
@@ -99,14 +100,19 @@ if __name__ == '__main__':
                              'discount rate 0': 2.5, 'discount rate 1': 2.5, 'discount rate 2': 2.5
                          })
 
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    archive_dir = f"./archives_{timestamp}"
+
+    os.makedirs(archive_dir, exist_ok=True)
+
     with MultiprocessingEvaluator(dike_model) as evaluator:
         # Define convergence metrics
         convergence_metrics = [
             ArchiveLogger(
-                "./archives",
+                archive_dir,
                 [l.name for l in dike_model.levers],
                 [o.name for o in dike_model.outcomes],
-                base_filename="single_run.tar.gz",
+                base_filename="single_run_2.tar.gz"
             ),
             EpsilonProgress(),
         ]
@@ -117,11 +123,26 @@ if __name__ == '__main__':
 
     # Save results
     result_df = pd.DataFrame(result)
+
+    # Gather all relevant columns: uncertainties, levers, and outcomes
+    uncertainty_columns = [u.name for u in dike_model.uncertainties]
+    outcome_columns = [o.name for o in dike_model.outcomes]
+    lever_columns = [l.name for l in dike_model.levers]
+
     result_df.to_csv('optimization_policies_singlerun.csv', index=False)
     outcomes_df = result_df.loc[:, [col for col in result_df.columns if col in [o.name for o in dike_model.outcomes]]]
+    #outcomes without uncertainties
     outcomes_df.to_csv('optimization_outcomes_singlerun.csv', index=False)
+
+    # Ensure all relevant columns are included in the DataFrame
+    all_columns = uncertainty_columns + lever_columns + outcome_columns
+    result_df_combined = result_df.loc[:, all_columns]
+
+    # Save the combined DataFrame to CSV
+    result_df_combined.to_csv('combined_optimization_outcomes_singlerun.csv', index=False)
 
     # Save convergence metrics
     convergence_df = pd.DataFrame(convergence)
     convergence_df.to_csv('convergence_metrics_singlerun.csv', index=False)
+
 

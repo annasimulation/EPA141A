@@ -91,8 +91,12 @@ if __name__ == '__main__':
         'discount rate 2': 2.5
     })
 
+    # Create an output directory
+    output_dir = "output"
+    os.makedirs(output_dir, exist_ok=True)
+
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    archive_dir = f"./archives_{timestamp}"
+    archive_dir = f"{output_dir}/archives_{timestamp}"
     os.makedirs(archive_dir, exist_ok=True)
 
     with MPIEvaluator(dike_model) as evaluator:
@@ -116,13 +120,13 @@ if __name__ == '__main__':
     outcome_columns = [o.name for o in dike_model.outcomes]
     lever_columns = [l.name for l in dike_model.levers]
 
-    result_df.to_csv('optimization_policies_singlerun.csv', index=False)
+    result_df.to_csv(f'{output_dir}/optimization_policies_singlerun.csv', index=False)
     outcomes_df = result_df.loc[:, [col for col in result_df.columns if col in outcome_columns]]
-    outcomes_df.to_csv('optimization_outcomes_singlerun.csv', index=False)
+    outcomes_df.to_csv(f'{output_dir}/optimization_outcomes_singlerun.csv', index=False)
 
     all_columns = uncertainty_columns + lever_columns + outcome_columns
     result_df_combined = result_df.loc[:, all_columns]
-    result_df_combined.to_csv('combined_optimization_outcomes_singlerun.csv', index=False)
+    result_df_combined.to_csv(f'{output_dir}/combined_optimization_outcomes_singlerun.csv', index=False)
 
     convergence_df = pd.DataFrame(convergence)
-    convergence_df.to_csv('convergence_metrics_singlerun.csv', index=False)
+    convergence_df.to_csv(f'{output_dir}/convergence_metrics_singlerun.csv', index=False)

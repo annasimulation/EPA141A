@@ -2,7 +2,7 @@
 
 #SBATCH --job-name="mordm"
 #SBATCH --time=01:00:00
-#SBATCH --ntasks=48
+#SBATCH --ntasks=24
 #SBATCH --cpus-per-task=1
 #SBATCH --partition=compute
 #SBATCH --mem-per-cpu=4GB

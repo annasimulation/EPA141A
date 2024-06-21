@@ -6,11 +6,11 @@ Further, it will elaborate on the steps performed for the analyses, as also desc
 *Group 13:*
 
 | Student            | Student Number |
-|--------------------| -------------- |
+|--------------------|----------------|
 | Klessens, Joost    | 4913299        |
 | Vos, Max           | 5083168        |
 | ter Avest, Noë     | 4955889        |
-| Paardekooper, Anna | 4678850        |
+| Paardekooper, Anna | 4909445        |
 
 ## Contents
 - [Requirements](#requirements)
@@ -72,7 +72,7 @@ Below, a tree can be found with all the directories found in the project. The st
 ```
 
 ### Directories
-* [archives/](archives) In the archives folder, analyses have been stored for experimenting and that where not further used. Also, certain outputs have been stored for potential further use. This folder does not contain important files for the analyses. 
+* [archives/](archives) In the archives folder, firstly, the tar files can be found from the MORDM analyses. Secondly, analyses have been stored for experimenting that where not further used. Also, certain outputs have been stored for potential further use.  
 * [data/](data) The data folder contains the data provided by the course. No adjustments have been made in this folder, only files have been read.
 * [delftblue_outcomest_tests/](img) The delftblue folders contains the files and outputs that have been used in the testing with the Delftblue supercomputer. Unfortunately, the running with the Delftblue computer did not supply us with the wished for outcomes of analysis. The files and scripts had been saved for potential further use. Unfortunately, there was too little time left to do this. 
 * [img/](img) The images folder contains all the plotted figures and graphs from the analyses.

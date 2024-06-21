@@ -61,7 +61,7 @@ Below, a tree can be found with all the directories found in the project. The st
 ├── MORDM_Singlerun_results.ipynb
 ├── Bestpolicy_dike_model_simulation.py
 ├── Policy_Vulnerability_PRIM.ipynb
-├── MORDM multi-scenario_results.ipynb
+├── MORDM_multi_scenario_results.ipynb
 # Other
 ├── .gitattributes
 ├── .gitignore
@@ -100,7 +100,7 @@ To further validate the sensitivity analysis, feature scoring is performed to ha
 The method of `Extra Trees` is chosen using a regression mode. Again, the figures are saved in the [img](img) folder and the data in the [output](output) folder.
 
 ### Step 3: Many-Objective Robust Decision Making Single-Scenario
-Single scenario MORDM is performed in the [MORDM Multi Scenario](MORDM_Singlerun.py) file to find the most optimal policy. 
+Single scenario MORDM is performed in the [MORDM Single Scenario](MORDM_Singlerun.py) file to find the most optimal policy. 
 The optimal policy can be found in [optimization_policies_singlerun.csv](output/optimization_policies_singlerun.csv). The outcomes of the MORDM analysis are to be found in [optimization_outcomes_singlerun.csv](output/optimization_outcomes_singlerun.csv). 
 Consequently, the convergence metrics are created and stored to [convergence_metrics_singlerun.csv](output/convergence_metrics_singlerun.csv).
 The file [MORDM_Singlerun_results.ipynb](MORDM_Singlerun_results.ipynb) creates the results for the single scenario MORDM that are again saved in the [output](output) and [image](img) folders.  
@@ -116,4 +116,4 @@ The [Policy_Vulnerability_PRIM.ipynb](Policy_Vulnerability_PRIM.ipynb) uses the 
 The boxes are further peeled to find the eventual [worst case scenarios](output/worst_5_case_scenarios.csv).
 
 ### Step 5: Many-Objective Robust Decision Making Multi-Scenario
-Following, the 5 worst case scenarios are used for the MORDM for multi scenarios. This MORDM analysis runs the 5 worst case scenarios and further optimalises the preferred policies. Output can be found ... 
+Following, the 5 worst case scenarios are used for the MORDM for multi scenarios. This MORDM analysis runs the 5 worst case scenarios and further optimalises the preferred policies. The results are simulated in the [MORDM_multi_scenario_results.ipynb](MORDM_multi_scenario_results.ipynb). The optimised policies found in this MORDM analysis are the basis of the advise for our client. 

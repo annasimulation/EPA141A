@@ -35,6 +35,9 @@ pip install -r requirements.txt
 ```
 For running all the files, we used a virtual environment, using Python 3.11
 
+There could be troubles opening the Jupyter notebooks, due to errors with Github. Because of this, all Jupyter notebooks have also been copied to Python files with the endings _ifnotebookdoesnotwork.
+We advise to open the project in a virtual environment in Pycharm to read all files. 
+
 ## File Structure
 Below, a tree can be found with all the directories found in the project. The structure consists of certain (output) folders and the main Python files used for analyses.
 ```
@@ -117,3 +120,5 @@ The boxes are further peeled to find the eventual [worst case scenarios](output/
 
 ### Step 5: Many-Objective Robust Decision Making Multi-Scenario
 Following, the 5 worst case scenarios are used for the MORDM for multi scenarios. This MORDM analysis runs the 5 worst case scenarios and further optimalises the preferred policies. The results are simulated in the [MORDM_multi_scenario_results.ipynb](MORDM_multi_scenario_results.ipynb). The optimised policies found in this MORDM analysis are the basis of the advise for our client. 
+
+

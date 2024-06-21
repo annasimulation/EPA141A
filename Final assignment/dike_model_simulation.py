@@ -1,7 +1,8 @@
-from ema_workbench import Model, MultiprocessingEvaluator, Policy, Scenario
+from ema_workbench import Model, MultiprocessingEvaluator, Policy, Scenario, Samplers
 
 from ema_workbench.em_framework.evaluators import perform_experiments
 from ema_workbench.em_framework.samplers import sample_uncertainties
+from SALib.analyze import sobol
 from ema_workbench.util import ema_logging
 import time
 from problem_formulation import get_model_for_problem_formulation
@@ -64,15 +65,16 @@ if __name__ == "__main__":
 
 # multiprocessing
     with MultiprocessingEvaluator(dike_model) as evaluator:
-       results = evaluator.perform_experiments(scenarios=10, policies=policy0,
+       results = evaluator.perform_experiments(scenarios=100, policies=policy0,
                                                uncertainty_sampling='sobol')
+
 
     # Convert experiments and outcomes to dataframes
     experiments_df = pd.DataFrame(experiments)
     outcomes_df = pd.DataFrame(outcomes)
 
     # Display experiments
-    experiments_df.to_csv('experiments_df6.csv')
+    experiments_df.to_csv('output/experiments_df6.csv')
 
     # Display outcomes
-    outcomes_df.to_csv('outcomes_df6.csv')
+    outcomes_df.to_csv('output/outcomes_df6.csv')

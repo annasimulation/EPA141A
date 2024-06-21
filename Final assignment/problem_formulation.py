@@ -1,3 +1,8 @@
+##############################
+###Problem formulation file###
+##############################
+#used to define the problem formulation
+#functions created here are called from other python files to get the proper problem formulation
 """
 Created on Wed Mar 21 17:34:11 2018
 

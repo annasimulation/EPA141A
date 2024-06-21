@@ -2,7 +2,7 @@
 ###Simulation experiments from selected policy###
 #################################################
 
-#importing usedfunctions
+#importing used functions
 from ema_workbench import Model, MultiprocessingEvaluator, Policy, Scenario
 from ema_workbench.util import ema_logging
 from problem_formulation import get_model_for_problem_formulation
